@@ -1,0 +1,340 @@
+/*
+ * Design Tokens based on the desired aesthetic (soft, vibrant, rounded)
+ */
+:root {
+    /* Main Background Gradient */
+    --gradient-start: #FF69B4; /* Hot Pink */
+    --gradient-end: #8A2BE2;   /* Blue Violet */
+    
+    /* Component Colors */
+    --card-background: #ffffff;
+    --text-color: #333333;
+    --muted-text: #6b6b6b;
+    --link-color: #7B68EE; /* Medium Purple for links */
+
+    /* Primary CTA/Button Color (The subtle purple in the "Read More" button) */
+    --cta-color: #DDA0DD; /* Plum/Light Purple */
+    --cta-hover-color: #B370D8;
+
+    /* Structural Properties */
+    --border-radius-lg: 16px; /* Large rounded corners for cards */
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08); /* Soft, pronounced shadow */
+    --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.2); 
+    --transition-speed: 0.3s;
+    
+    /* Form Specific Colors */
+    --input-background: #f8f8f8;
+    --input-border: rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------------------
+ * GLOBAL STYLING
+ * --------------------------------- */
+
+body {
+    min-height: 100vh;
+    margin: 0; 
+    padding: 0;
+    /* Apply the custom gradient with animation */
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite; 
+    font-family: 'Inter', sans-serif; /* A clean, modern font */
+    color: var(--text-color);
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Ensure main content container is transparent */
+main.container {
+    background-color: transparent !important;
+    padding-top: 20px;
+    padding-bottom: 80px;
+}
+
+/* ---------------------------------
+ * TOAST/FLASH MESSAGE STYLING (NEW)
+ * --------------------------------- */
+
+#toast-container {
+    /* Fix the container position relative to the viewport */
+    position: fixed; 
+    top: 20px; 
+    right: 20px;
+    z-index: 1050; /* Ensure it is above the navbar and other elements */
+    /* Limit the max width so the messages don't get too large */
+    max-width: 350px; 
+}
+
+/* Style the alerts inside the container to look more like toasts */
+.toast-custom {
+    /* Use Bootstrap's alert classes but give it a softer look */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    margin-bottom: 10px;
+}
+
+/* ---------------------------------
+ * NAVIGATION BAR STYLING
+ * --------------------------------- */
+
+.navbar {
+    background-color: transparent !important; /* Make navbar blend with gradient */
+    border-bottom: none;
+    padding: 1rem 0;
+}
+
+.navbar-brand, .nav-link {
+    font-weight: 500;
+    color: var(--card-background) !important; /* White text */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------------------------------
+ * TYPOGRAPHY AND HEADERS
+ * --------------------------------- */
+
+/* Main Hero Heading Style (The "Latest Articles" section) */
+.hero-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--card-background);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* New: Heading for the "Add Post" page */
+.form-hero-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--card-background); /* White text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.hero-subtext {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 3rem;
+}
+
+/* Card Title Style */
+.card .post-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+/* Card Description Style */
+.card .post-excerpt {
+    color: var(--muted-text);
+    font-size: 0.95rem;
+}
+
+/* ---------------------------------
+ * CARD AND INTERACTIVITY STYLING
+ * --------------------------------- */
+
+.card {
+    border: none !important;
+    border-radius: var(--border-radius-lg) !important;
+    box-shadow: var(--shadow-soft);
+    background-color: var(--card-background);
+    transition: all var(--transition-speed) ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+    box-shadow: var(--shadow-hover);
+}
+
+.card-footer {
+    border-top: none !important;
+    background-color: var(--card-background);
+    padding-top: 0; /* Remove top padding to keep button close to text */
+}
+
+/* The "Read More" Button Style (Soft Purple Look) */
+.btn-read-more {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background: linear-gradient(90deg, #F0E6FA, var(--cta-color));
+    color: var(--primary) !important;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    transition: background var(--transition-speed) ease, transform 0.1s;
+    box-shadow: 0 4px 10px rgba(160, 0, 255, 0.1); /* Subtle shadow for button */
+}
+
+.btn-read-more:hover {
+    background: linear-gradient(90deg, #F0E6FA, var(--cta-hover-color));
+    color: var(--primary) !important;
+    transform: translateY(-1px);
+}
+
+/* ---------------------------------
+ * FORM STYLING 
+ * --------------------------------- */
+
+.form-card {
+    background-color: var(--card-background);
+    padding: 3rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    /* Base input style */
+    border-radius: 10px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-background);
+    padding: 0.75rem 1rem;
+    color: var(--text-color);
+    transition: all var(--transition-speed) ease;
+}
+
+.form-control:focus {
+    /* Focus style (subtle purple ring) */
+    background-color: var(--card-background);
+    border-color: var(--cta-color);
+    box-shadow: 0 0 0 0.25rem rgba(221, 160, 221, 0.25); /* Light plum glow */
+}
+
+/* Styling for the Publish/Update Button (same style as Read More) */
+.btn-publish {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(90deg, #F0E6FA, var(--cta-color));
+    color: var(--primary) !important;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background var(--transition-speed) ease, transform 0.1s;
+    box-shadow: 0 4px 10px rgba(160, 0, 255, 0.1); 
+}
+
+.btn-publish:hover {
+    background: linear-gradient(90deg, #F0E6FA, var(--cta-hover-color));
+    color: var(--primary) !important;
+    transform: translateY(-1px);
+}
+
+/* ---------------------------------
+ * POST DETAIL PAGE STYLING
+ * --------------------------------- */
+
+.post-card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.post-detail-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    line-height: 1.2;
+}
+
+/* NEW: Respect line breaks and spaces on the main content container */
+.post-detail-content {
+    white-space: pre-wrap; /* Apply this to the main div */
+}
+
+.post-detail-content p {
+    /* Base styling for paragraphs in the post content */
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    /* Removed white-space: pre-wrap; here as it's now on the parent .post-detail-content */
+}
+
+/* Styling for the Back button */
+.btn-back {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background-color: #f0f0f0; /* Light gray background */
+    color: var(--muted-text);
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    transition: background-color var(--transition-speed) ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.btn-back:hover {
+    background-color: #e0e0e0;
+    color: var(--text-color);
+    transform: translateY(-1px);
+}
+
+/* NEW: Edit Button Style */
+.btn-edit {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background-color: #f8e1fa; /* Very light purple */
+    color: var(--cta-hover-color);
+    font-weight: 500;
+    border: 1px solid var(--cta-color);
+    border-radius: 8px;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-edit:hover {
+    background-color: var(--cta-color);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* NEW: Delete Button Style */
+.btn-delete {
+    padding: 0.5rem 1.25rem;
+    background-color: #FFC0CB; /* Light Pink/Red hint */
+    color: #DC3545; /* Bootstrap Danger color */
+    font-weight: 500;
+    border: 1px solid #DC3545;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-delete:hover {
+    background-color: #DC3545;
+    color: white;
+    transform: translateY(-1px);
+}
+
+
+/* ---------------------------------
+ * FOOTER STYLING
+ * --------------------------------- */
+
+.app-footer {
+    padding: 30px 0;
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white on gradient */
+    color: white;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.85rem;
+}
+
+.social-icon {
+    color: white;
+    font-size: 1.2rem;
+    margin: 0 10px;
+    transition: color 0.2s ease;
+}
+
+.social-icon:hover {
+    color: var(--cta-color);
+}

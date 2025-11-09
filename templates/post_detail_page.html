@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <!-- Post Container Card -->
+            <div class="post-card p-5 my-4">
+                
+                <!-- Title -->
+                <h1 class="post-detail-title mb-3">{{ post.title }}</h1>
+                
+                <!-- Metadata -->
+                <p class="text-muted small mb-4">
+                    Published on: 
+                    <span class="fw-bold">{{ post.created_at | strftime('%B %d, %Y at %I:%M %p') }}</span>
+                </p>
+                
+                <hr class="mb-4">
+                
+                <!-- Content (FIX: Removed inline style and leading spaces before content variable) -->
+                <div class="post-detail-content lead">
+{{ post.content | safe }}
+                </div>
+
+                <!-- Admin and Back Buttons -->
+                <div class="mt-5 d-flex justify-content-between align-items-center">
+                    
+                    <!-- Back button (Using custom btn-back class) -->
+                    <a href="{{ url_for('index') }}" class="btn-back text-decoration-none">
+                        &larr; Back to Blog
+                    </a>
+
+                    <!-- Admin Actions: Edit and Delete -->
+                    <div class="d-flex align-items-center">
+                        <!-- Edit Button (Using custom btn-edit class) -->
+                        <a href="{{ url_for('edit', post_id=post.id) }}" 
+                            class="btn-edit text-decoration-none me-3">
+                            Edit Post
+                        </a>
+                        
+                        <!-- Delete Form -->
+                        <form method="POST" action="{{ url_for('delete', post_id=post.id) }}" class="d-flex align-items-center">
+                            
+                            <!-- The button to SHOW the key input (type="button" to prevent form submission) -->
+                            <button type="button" 
+                                    id="show-delete-key-btn" 
+                                    class="btn-delete" 
+                                    style="margin-right: 0.5rem;">
+                                Delete Post
+                            </button>
+
+                            <!-- Delete Controls Container (Initially Hidden) -->
+                            <div id="delete-key-controls" class="d-flex align-items-center" style="display: none !important;">
+                                
+                                <!-- Key Input Field (TYPE="password" ensures masking) -->
+                                <input type="password" 
+                                            name="admin_key" 
+                                            placeholder="Admin Key" 
+                                            class="form-control form-control-sm me-2" 
+                                            required 
+                                            style="width: 150px;">
+                                
+                                <!-- Confirmation Delete Button (Type="submit") -->
+                                <button type="submit" 
+                                            class="btn-delete">
+                                    Confirm Delete
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to toggle the delete key input visibility -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const showButton = document.getElementById('show-delete-key-btn');
+            const deleteControls = document.getElementById('delete-key-controls');
+
+            // Toggle visibility on click
+            showButton.addEventListener('click', function() {
+                // Hide the main Delete Post button
+                showButton.style.display = 'none';
+
+                // Show the form controls (key input and Confirm Delete button)
+                deleteControls.style.display = 'flex';
+                
+                // Set focus to the input field for immediate typing
+                deleteControls.querySelector('input[name="admin_key"]').focus();
+            });
+        });
+    </script>
+{% endblock %}

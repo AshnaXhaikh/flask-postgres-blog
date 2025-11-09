@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Hero Section: Title and Subtext -->
+    <div class="text-center py-5">
+        <h1 class="hero-heading">Latest Articles</h1>
+        <p class="hero-subtext lead">Explore insightful articles about innovation, digital creation, and the future of technology.</p>
+    </div>
+
+    <!-- Blog Posts Grid -->
+    {% if posts %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            
+            {% for post in posts %}
+                <div class="col">
+                    <div class="card h-100">
+                        
+                        <div class="card-body">
+                            <!-- Title -->
+                            <h5 class="post-title">{{ post.title }}</h5>
+                            
+                            <!-- Excerpt -->
+                            <p class="post-excerpt">{{ post.content | truncate(120) }}</p>
+                            
+                            <!-- Metadata (Date/Author if available) -->
+                            <p class="card-text text-muted small mt-2">
+                                Posted: {{ post.created_at | strftime('%B %d, %Y') }}
+                            </p>
+                        </div>
+                        
+                        <!-- Read More Button -->
+                        <div class="card-footer">
+                            <a href="{{ url_for('post_detail', post_id=post.id) }}" class="btn-read-more text-decoration-none">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+        <!-- Styled Empty State -->
+        <div class="alert alert-light text-center mt-5 p-4" role="alert">
+            <h4 class="alert-heading text-color">No Blogs Found! 📝</h4>
+            <p class="text-color">Your blog is brand new. Be the first to start posting!</p>
+            <hr>
+            <p class="mb-0"><a href="{{ url_for('add') }}" class="alert-link" style="color: var(--link-color);">Add your first post</a>.</p>
+        </div>
+    {% endif %}
+
+{% endblock %}

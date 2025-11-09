@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <!-- Main Heading for the Form -->
+        <h1 class="form-hero-heading text-center mt-4 mb-5">Add a New Blog Post</h1>
+
+        <!-- The Form Container Card -->
+        <div class="form-card">
+            <form method="POST">
+                <div class="mb-4">
+                    <label for="title" class="form-label">Post Title</label>
+                    <input type="text" class="form-control" id="title" name="title" required placeholder="Enter a descriptive title...">
+                </div>
+                <div class="mb-4">
+                    <label for="content" class="form-label">Post Content</label>
+                    <textarea class="form-control" id="content" name="content" rows="10" required placeholder="Write your post here..."></textarea>
+                </div>
+                <!-- Buttons are aligned to the right and styled to match the custom classes -->
+                <div class="d-flex justify-content-end align-items-center">
+                    
+                    <!-- Back to Blog Link (Using custom btn-back class) -->
+                    <a href="{{ url_for('index') }}" 
+                       class="btn-back me-3 text-decoration-none">
+                        ← Back to Blog
+                    </a>
+                    
+                    <!-- Publish Button (Using custom btn-publish class) -->
+                    <button type="submit" 
+                            class="btn-publish">
+                        Publish
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

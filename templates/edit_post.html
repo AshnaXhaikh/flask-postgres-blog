@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <!-- Main Heading for the Form -->
+        <h1 class="form-hero-heading text-center mt-4 mb-5">Edit: {{ post.title }}</h1>
+
+        <!-- The Form Container Card -->
+        <div class="form-card">
+            <form method="POST">
+                <div class="mb-4">
+                    <label for="title" class="form-label">Post Title</label>
+                    <!-- Pre-fill with existing title -->
+                    <input type="text" class="form-control" id="title" name="title" required value="{{ post.title }}">
+                </div>
+                <div class="mb-4">
+                    <label for="content" class="form-label">Post Content</label>
+                    <!-- Pre-fill with existing content -->
+                    <textarea class="form-control" id="content" name="content" rows="10" required>{{ post.content }}</textarea>
+                </div>
+                <!-- Buttons are aligned to the right and styled to match the navbar button -->
+                <div class="d-flex justify-content-end align-items-center">
+                    
+                    <!-- Back to Post Link -->
+                    <a href="{{ url_for('post_detail', post_id=post.id) }}" 
+                       class="btn btn-outline-light me-3" 
+                       style="border-radius: 8px; color: var(--text-color);">
+                        ← Cancel
+                    </a>
+                    
+                    <!-- Update Button -->
+                    <button type="submit" 
+                            class="btn btn-primary btn-publish" 
+                            style="border-radius: 8px;">
+                        Update Post
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
