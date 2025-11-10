@@ -338,3 +338,62 @@ main.container {
 .social-icon:hover {
     color: var(--cta-color);
 }
+
+/* ==================================================== */
+/* === MOBILE RESPONSIVENESS FIXES (BELOW 600px) ==== */
+/* ==================================================== */
+@media (max-width: 600px) {
+    /* 1. Navbar Fixes */
+    .navbar .container-fluid {
+        flex-wrap: wrap; 
+        padding: 0.5rem 1rem;
+    }
+    .navbar-brand {
+        width: 100%;
+        margin-bottom: 0.5rem; 
+        text-align: center;
+    }
+
+    /* 2. Post Detail Button Stacking Fixes */
+    .mt-5.d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: flex-start !important;
+        width: 100%;
+    }
+    .d-flex.align-items-center {
+        flex-direction: column;
+        align-items: stretch !important;
+        width: 100%;
+        margin-top: 1rem;
+    }
+    .btn-edit {
+        margin-right: 0 !important;
+        margin-bottom: 10px; 
+        text-align: center;
+        width: 100%;
+        display: block; 
+        padding: 0.75rem 1rem;
+    }
+
+    /* 3. Delete Form (Input/Button) Fixes */
+    #delete-key-controls {
+        flex-direction: column;
+        align-items: stretch !important;
+        width: 100%;
+    }
+    #delete-key-controls input.form-control {
+        width: 100% !important;
+        margin-bottom: 10px;
+        margin-right: 0 !important;
+    }
+    .btn-delete {
+        width: 100%;
+        margin-right: 0 !important;
+        margin-bottom: 10px;
+    }
+    
+    /* 4. Card Padding Reduction */
+    .post-card, .form-card {
+        padding: 1.5rem !important;
+    }
+}
